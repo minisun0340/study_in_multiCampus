@@ -1,0 +1,98 @@
+엣지 디바이스는 센서 같은 거, 블루투스, SPI, I2C
+게이트웨이디바이스는 전체적으로 네트워크 구축해서 사용할 수 있는 환경- 통신, 안드로이드 엮는 작업
+
+가까운 거리의 통신
+<I2C(Inter-Integrated Circuit)>
+https://www.arduino.cc/en/Reference/Wire
+  - 아두이노에서 TWI(Two Wire Interface) 통신이라고도 한다.
+  - 근거리에서 장치들끼리의 통신을 위해 만들어진 방식
+- 127개까지 연결 가능
+- master/slave 구조
+- 두개의 선을 이용해서 작업
+
+	SDA(Serial Data): 데이터선
+	SCL(Serial Clock): 클럭 신호선(Hz)
+- 아두이노에서 SDA = A4
+                     SCL = A5
+- 데이터를 전송하거나 수신하고 종료하거나 모든 결정은 마스터가 한다.
+- 데이터를 한쪽으로 보낼 수 있다. master -> slave
+- 1개의 데이터선이기 때문에 동시에 데이터를 주고받을 수 없다.
+- 모든 통신은 마스터가 주도
+ * 마스터가 slave에 데이터를 요구하면 slave는 response
+ * slave가 먼저 마스터에게 데이터를 보내지 않는다.
+- I2C통신에서 slave는 address로 구분한다.
+		*address : 주로 제품을 만든 업체에서 부여한 주소
+			각 slave는 개별 주소를 갖고 있다.
+- SDA와 SCL은 기본적으로 HIGH상태가 유지
+- HIGH에서 LOW로 바뀔 때 데이터 전송이 시작
+
+
+
+--------------------------------------------------------------------------------
+<SPI (Serial Peripheral interface)>
+https://www.arduino.cc/en/Reference/SPI
+- 근거리에 있는 부품들끼리 통신을 하기 위해서 만들어진 기술
+- 3개의 선을 이용한다
+	MOSI(Master Output Slave Input) : 데이터선
+	MISO(Master Input Slave Output) : 데이터선
+	SCK : 클럭신호를 전송하기 위한 선
+- 모든 통신의 시작과 통신의 방향은 마스터가 결정
+- I2C통신보다 속도가 빠르다.
+- INPUT OUTPUT 따로따로 가능
+- chip selection(ss) 핀을 가지고 구분한다. (통신하고 싶은 소자에 대화시도,,?)
+   * 기본상태로 HIGH값을 유지
+   * HIGH값이 LOW로 바뀌는 순간 데이터가 전송되는 slave를 구분한다고 생각하면 된다.
+   * 데이터 전송이 완료되면 LOW신호를 HIGH신호를 바꿔준다.
+-RST : reset
+
+
+-PICC는 지금 우리가 사용하는  RFID에서 사용하는 태그카드와 같은 유형을 의미합니다.
+
+--------------------------------------------------------------------------------
+<UART> 유아트 - 직렬 통신
+- Serial.print 가 가능했던 이유
+- 데이터 수신용 선 하나, 송신용 선 하나
+
+RX 는 받는 쪽 -> TX
+TX 는 보낸 쪽 -> RX
+
+-MCU칩 내부에 존재
+(MCU안에 
+CPU, 메모리, UART ....)
+
+PC, bluetooth 둘다 직렬 통신 -> 통신상 오류 발생할 수 있으므로
+  			   가상 포트 설정 (other digital pins)
+스케치 - 라이브러리 포함하기 - softwareSerial
+가상이기 때문에 아무 핀으로 해도 상관 없음
+
+
+블루투스 모듈
+ - 구불구불한 모양 = 안테나
+ - slave 외부에서 요청들어오는 것을 받아서 사용만 함
+
+https://docs.arduino.cc/learn/built-in-libraries/software-serial
+직렬통신을 사용하기 위한 객체설정
+SoftwareSerial(rxPin, txPin, inverse_logic)
+
+<AT명령>
+1>2.0
+	시리얼모니터에서 전송옵션 선택 : line endging 없음
+	
+	통신할 수 있는 상태인지 확인 : AT [전송] / OK [응답]
+	블루투스 이름을 변경 : AT+NAME 장치명(myBT_hc06) / OKname [응답]
+
+
+2>3.0
+	시리얼모니터에서 전송옵션 선택 : Both NL&CR
+	통신할 수 있는 상태인지 확인 : AT [전송] / OK [응답]
+	블루투스 이름을 변경 : AT+NAME 장치명(myBT_hc06) / OK [응답]
+
+PIN : 1234
+
+print 와 write의 차이점 : 
+write는 ascii로 보내지 않고 그냥 보내기 때문입니다.
+
+동시성 -> 쓰레드 처리
+아두이노는 싱글쓰레드
+
+라떼판다랑 라즈베리파이는 노트북에 연결하면 꺼짐

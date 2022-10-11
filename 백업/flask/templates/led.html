@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>Flask LED제어</h1>
+  <h3>
+    <!--flask내부에서 사용하는 프레임워크 (jinja2)-->
+    {% if message %}
+        {{message}}
+        {{status}}
+        {{hum}}
+        {{temp}}
+        {{distance}}
+    {% endif %}
+
+    {% if status == true %}
+        (<a href="/off"> Turn off</a>)
+    {% else %}
+        (<a href="/on"> Turn on </a>)
+    {% endif %}
+
+  </h3>
+</body>
+</html>

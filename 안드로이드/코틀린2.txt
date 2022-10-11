@@ -1,0 +1,6 @@
+getSystemService
+
+OS내부에서 제공하는 서비스
+
+
+layer inflator service 실제로 그리는?? 서비스

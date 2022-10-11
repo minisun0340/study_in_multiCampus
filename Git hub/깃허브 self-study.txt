@@ -1,0 +1,25 @@
+wc -l   => 개수
+
+
+
+git log --oneline | wc -l 
+=> 전체 소스파일 수정내역 개수 세기
+
+git show 커밋고유ID
+=> 소스수정 내역(commit) 한가지 확인하기
+
+git show 6c8e2ba | grep "diff --git"
+=> 6c8e2ba 의 수정내역
+
+grep(get regular expression)
+=> 텍스트 검색 기능
+
+git show 6c8e2ba | grep "diff --git" | wc -l
+=> 6c8e2ba 의 수정내역의 개수
+
+git log -p
+=> 전체 소스파일 수정내역 자세히 보기
+
+git log --oneline --after=2020-06-01 --before=2020-06-30
+=> 2020년 6월 한달간 수정내역
+

@@ -1,0 +1,18 @@
+servo.attach(핀번호, 544, 2500)
+
+serial.read() ascii값으로 읽기
+
+Serial.write(inputdata);//문자의 형태로 전송
+
+Serial.println(inputdata);//ascii로 전송
+
+Serial.readString() 의 사용방법 -> 문자열읽기
+
+num = Serial.read(); //read는 숫자를 입력할 경우 ascii값 반환 1=49
+num = Serial.parseInt(); //숫자로 변환
+
+//Serial 통신을 끊었다가 다시 시작
+//Serial.end()
+
+//사용자가 입력하기 전까지 아무 코드도 실행되지 않는 효과를 나타낼 수 있다.
+    while(Serial.available()==0){}

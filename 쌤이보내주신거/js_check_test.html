@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="EUC-KR">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		//food라는 name으로 정의된 체크를 박스를 모두 선택/해제하는 작업을 수행하는 함수
+		function allcheck(){
+			//food라는 이름으로 정의된 체크박스가 여러 개 - 배열로 관리
+			mycheck = document.cbfmt.food;
+			//alert(mycheck);
+			//alert(mycheck.length);
+			//allchk라는 이름으로 정의된 체크박스의 값을 가져오기
+			//=> allchk가 선택되면 나머지 food는 모두 선택(선택 - true)
+			//=> allchk가 선택해제되면 나머지 food는 모두 선택 해제(해제 - false)
+			allChkVal = document.cbfmt.allchk.checked;
+			//alert(allChkVal);
+			for(i=0;i<mycheck.length;i++){
+				mycheck[i].checked = allChkVal;
+			}
+		}
+		//선택된 체크박스의 value가 div에 출력될 수 있도록 작성
+		//=> 전체 체크박스를 for문안에서 check유무를 확인
+		function ckFunc(){
+			mychk = document.cbfmt.food;
+			chkVal = "";//체크되어 있는 항목의 문자열을 추가할 변수
+			for(i=0;i<mychk.length;i++){
+				if(mychk[i].checked){//체크 유무를 평가
+					chkVal = chkVal + mychk[i].value+" ";
+				}
+			}
+			//innerHTML이용해서 문자열 출력 - 기존의 컨텐츠를 덮는다.
+			//innerHTML은 p,div,span태그
+			document.getElementById("result").innerHTML = chkVal;
+		}
+	</script>
+</head>
+<body>
+
+	<form name="cbfmt">
+		<label>아이스크림</label> 
+		<input type="checkbox" name="food"
+		 value="아이스크림" id="ice"> 
+			<label>커피</label> <input type="checkbox"	
+			name="food" value="커피" id="coffee">
+			 <label>음료수</label> <input type="checkbox" 
+			 name="food" value="음료수" id="beverage"> 
+			<label>모두체크/해제</label>
+		<input type="checkbox" name="allchk" 
+		id="allchk" onclick="allcheck()"><br>
+
+		<input type="button" value="전송" onclick="ckFunc()">
+	</form>
+	<div id="result"></div>
+
+</body>
+</html>

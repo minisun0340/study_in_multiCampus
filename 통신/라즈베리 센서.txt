@@ -1,0 +1,30 @@
+라즈베리파이 센서
+DHT11
+온습도 센서
+
+https - 공인된 인증기관한테 인증서를 받아야 함(인증받으면 주소창에 자물쇠)
+     secure
+
+A full buffer was not returned. Try again.
+Checksum did not validate. Try again. 얘는 범위가 벗어난거고
+
+오류로 인하여 실행을 종료(try 내부 while) 
+오류가 있지만 계속 실행( while 내부 try)으로 생각하시면 됩니다.
+
+[미션]
+1. 조명의 on/off버튼을 누르면
+  led_on, led_off를 publish해서 라즈베리파이에 led가 켜지도록
+
+2. 습도, 온도, 거리가 제대로 출력되도록 라즈베리파이의 온습도센서와 초음파
+  센서를 연결해서 publish된 메시지를 subscribe해서 출력할 수 있도록 설정
+
+  - index.html을 수정해서 broker가 send해주는 값을 출력
+  - 라즈베리파이에서 pub/sub를 할 수 있도록 작업
+   Mqtt통신 하는 객체 : iot폴더에 mymqtt모듈 생성하고 작업
+   LED : mydevice모듈을 생성하고 작업
+           메시지가 오면 led_on인 경우 led켜고
+                              led_off인 경우 led끄기
+   센서를 모델링한 객체 : mysensor모듈생성하고 작업
+                                 DHT11, HC-SR04센서 작업할 수 있도록
+                                 클래스를 각각 작성
+  - 필요한 작업은 쓰레드로 작성하기

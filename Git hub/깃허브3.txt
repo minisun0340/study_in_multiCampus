@@ -1,0 +1,10 @@
+본인이름만 작성 commit -> PR 로 제출하기
+
+1. 팀프로젝트 fork 하기
+2. fork한 프로젝트를 clone 하기
+3. clone 완료한 폴더로 이동(cd 폴더명)
+4. nano 에디터로 README.md 이름적기
+5. git add README.md
+6. git commit -m "Add my name"
+7. git push origin master
+8. fork 한 프로젝트 GitHub 사이트에서 PR 버튼

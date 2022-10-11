@@ -1,0 +1,34 @@
+sdk 안드로이드 개발할 때 사용툴
+api레벨
+안드로이드 플랫폼 버전
+
+xml 설정파일
+기종이 다른 것들을 연결하기 위해 만든것
+
+
+안드로이드 4대 구성요소
+1)화면 = activity
+     layout File = xml
+2)service = 화면에 보이진 않지만 실행하기 위해 돌아가는 것. 뒤에서 통신.
+3)broadcast Receiver = 액션이 발생했을 때 실행
+4)content Provider = 데이터를 제공해주는 것(공유)
+
+랭귀지 바꾸기
+
+intent-filter가 있을때만 첫화면으로 볼수잇음
+
+
+Docs -> Guides -> app entry points -> activities
+
+view = component = widget
+
+linearlayout은 순서대로 배치(수직 or 수평)
+
+
+프로젝트 당 R파일 하나
+--- res 리소스를 관리하는 파일
+
+
+리소스의 외부화
+
+library를 안드로이드에서는 api라고 함

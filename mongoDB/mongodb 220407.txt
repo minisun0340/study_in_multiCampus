@@ -1,0 +1,88 @@
+Aggregation(집합, 집계)
+   - Aggregation framework와 mapreduce가 제공
+   - RDBMS의 group by의 개념
+   - 집계작업이 단순한 경우에 mapreduce(빅데이터에서 필요)보다는 aggregation framework 사용
+   - input으로 사용된 document를 처리하고 처리 결과를 output document를 생성
+   - 생성된 output document를 또 다른 명령어의 input document로 활용 => 이를 파이프라인(Pipeline)이라고 한다.
+   - 파이프라인으로 집계를 처리하며 이 처리 명령을 배열로 나타낸다.
+
+   -The aggregation pipeline can operate on a sharded collection.
+       : 데이터발생속도가 빠르고 양이 많다보니 나눠져서, 데이터를 샤딩해서 운영(분할 저장)
+
+1. Aggregation 연산자
+           (rdbms에서는)
+$match : where절, having절과 같은 개념
+$group : group by
+$sort : order by
+$sum : 총합, 총 갯수
+            ----   ----------- 1을 정의
+      총합을 계산할 필드
+$avg : 평균
+$max : 최대값
+$min : 최소값
+
+2. 형식
+   db.collection명.aggregate(aggregation 연산들을 이용해서 명령어를 정의)			------------------여러개를 사용하는 경우 배열로 표현
+
+   aggregation 연산들을 이용해서 명령어
+   ([
+       {$match:{조건...}},                                ------- 필드 alias
+       {$group:{필드명:집계할 기준이 되는 필드, 필드명:{집계함수 : 집계할 필드명이나 값}}}
+    ])
+
+   1) 예제
+      - addr별 인원수
+	db.score.aggregate([ {$group:{myaddr:"$addr", num:{$sum:1}}}]) - X
+	db.score.aggregate([ {$group:{_id:"$addr", num:{$sum:1}}}]) -O 필드명은 _id
+                                                          ------ addr필드에 저장된 값을 가져올 것이므로 $와 함께 사용 
+	 rdbms에서는=> select addr myaddr, count(id) num
+                                from score
+                                group by addr
+
+	[미션]
+	-dept별 인원수
+		db.score.aggregate([ {$group:{_id:"$dept", num:{$sum:1}}}])
+	-dept별 java점수의 평균
+		db.score.aggregate([ {$group:{_id:"$dept", java_avg:{$avg:"$java"}}}])
+	-addr별 servlet점수의 합계
+		db.score.aggregate([ {$group:{_id:"$addr", serv_sum:{$sum:"$servlet"}}}])
+
+
+
+   2) 조건을 적용한 예제
+      $match를 써서 조건을 적용
+      java가 80점 넘는 사람들이 부서별로 몇 명인지 구하기
+          => select dept, count(id) 인원수
+               from score
+               where java>=80
+               group by dept
+                                             --------------- find의 조건과 동일
+       db.score.aggregate([ {$match:{java:{$gte:80}}},
+                                   {$group:{_id:"$dept", num:{$sum:1}}} ])
+
+	[조건]
+             - 배열 데이터가 있는 경우
+	- favorites의 city배열에 서울과 인천이 존재하는 모든 document를 조회
+
+		db.test.find({"favorites.city":{$in:["서울", "인천"]}})
+	- favorites의 city배열에 서울과 인천이 존재하고 java점수가 90점 이상인 데이터 조회
+                         db.test.find(  {$and:  [{"favorites.city":{$in:["서울", "인천"]}}, {java:{$gte:90}}]  }    )
+
+	[미션] - dm제출
+	- 쉬리 영화를 보거나 부서가 인사인 document 조회
+		db.test.find( {$or: [
+			{"favorites.movie":"쉬리"},
+			{dept:"인사"}]})
+	- city가 부산, 울산이면서 헬로카봇을 본 document 조회
+		db.test.find( {$and:[
+			{"favorites.city":{$in:["부산", "울산"]}},
+			{"favorites.movie":"헬로카봇"}]})
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+if, if/else, if/else if
+switch
+for
+-실행할 횟수가 정해져 있을 때
+-초기값을 저장할 변수
+- 카운터 변수 i
+
+for(int i=1 ; i<=5 ; i++){ 반복해서 실행할 명령문 }
+i++ = (i=i+1)
+
+for(①int i=1;②i<=5;④i++){
+③Serial.println("")
+}
+
+
+
+
+while
+
+배열
+함수

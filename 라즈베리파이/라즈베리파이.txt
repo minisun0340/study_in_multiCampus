@@ -1,0 +1,16 @@
+라즈베리파이에 접속할 수 있는 ssh 프로토콜는 비활성화(암호화) 되어있음
+
+ssh : secure shell 텔렛이랑 비슷
+
+wpa_supplicant.conf - 반드시 이 파일명
+
+DHCP 아이피를 가상으로 만들어낸것 192.168.으로 시작 = 내부망에서 쓰는 아이피
+세자리까지 동일하게 맞춰줘야 원격조정가능
+
+putty에서
+라즈베리 디폴트 아이디 : pi
+패스워드 : raspberry -안보임
+
+
+라즈베리 셧다운 하는 방법(putty에서)
+sudo shutdown -h now

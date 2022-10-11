@@ -1,0 +1,41 @@
+시리얼 통신 : 직접적 데이터 송수신 - 직렬
+RX(receive)
+TX(transmit)
+Serial.begin(9600) 시리얼통신을 시작하겠습니다.
+변수 선언은 함수의 첫번째에 선언하기
+
+
+
+if (조건){조건만족시 실행}
+Serial.available() 데이터가 있으면 true
+Serial.read() ascii코드
+
+
+
+
+
+
+
+
+예제3>
+입력된 문자열이 arduino이면 "login"
+arduino가 아닌 경우 "logout"으로 입력
+-serial_exam3
+
+
+예제4>
+숫자를 입력 받아 A~F까지를 평가해서 출력하기
+-90~100 A
+-80~89 B
+-70~79 C
+-60-69 D
+-0~59 F
+-나머지 숫자는 error 출력
+-serial_exam4
+
+loop(){
+int num = 0; //초기화
+if(){
+num = Serial.parseInt(); //숫자 그대로 변환
+	}
+}

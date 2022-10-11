@@ -1,0 +1,56 @@
+.bashrc는 내가 로그인 했을 때마다 실행되는 파일
+
+profile은 처음 만들었을때
+
+callback 펑션 : 이벤트가 발생했을때(e.g. onclick) 알아서 실행하도록 설정
+
+
+
+=============================================
+raspberrypi camera(카메라 찍기)
+
+불스아이(지금 사용중인 OS)는 라즈베리파이 공식카메라 lib를 지원하지 않음
+bullseye - picamera 지원하지 않음
+터치스크린이랑 카메라 같이 연결하면 안됨
+buster에서는 picamera지원
+
+불스아이에서 새롭게 나온 libcamera 기능 =>  별도로 설정하지 않아도 사용가능
+but, picamera가 자료도 많고, AI랑 사용
+
+legacy카메라 지원중이면 vnc가 지원안됨
+그래서 putty 로 가서 설정 바꿀것
+
+*legacy(이전의 시스템) 사용
+1) sudo raspi-config -> 인터페이스옵션 -> legacy camera support enabled 선택
+2) 재부팅
+3) putty에서 (-o 뒤에는 파일명, 옵션 순서는 상관없음)
+raspistill -o image1.jpg :
+legacy camera설정을 추가하고 기존에 썼던 파이카메라의 기능을 사용하는 방식. 사진찍기
+정지사진
+raspistill -o test2.jpg -t 1000(타이머, 밀리세컨)
+-vf 수직으로 뒤집을 때
+-hf 수평으로 뒤집을때
+
+동영상찍을때 (확장자 h264) (-t 몇초동안 촬영)
+raspivid -o vid_t1.h264 -t 10000
+
+4) vnc로 확인하기 위해 
+sudo raspi-config -> 인터페이스옵션 -> legacy camera disabled 선택
+5) 재부팅
+
+파이썬 파이카메라 설치
+sudo apt-get install python-picamera
+
+
+
+
+
+*불스아이 지원 lib
+1) libcamera-jpeg -o pic.jpg 사진찍기
+
+=============================================
+
+
+[미션]
+5초에 한번씩 사진 5장 촬영하기
+ - image1.jpg ~ image.5.jpg

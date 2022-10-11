@@ -1,0 +1,8 @@
+sudo apt-get update업데이트 목록 받아오기
+sudo apt-get upgrade 다운로드 한거 설치하기
+  -- y 누르면 됨
+
+리눅스는 데비앙 - raspbian  apt-get
+            우분투                 apt-get
+            centOS                 윰??
+

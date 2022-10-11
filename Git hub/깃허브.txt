@@ -1,0 +1,202 @@
+CLI(커맨드라인 : 명령어 인터페이스)
+-예 : 사진파일 1만개 => 폴더정리
+-장점 : 가볍다(text), 세부기능 활용, 자동화(스크립팅)
+
+VS
+
+GUI (그래픽 유저 인터페이스)
+-예 : 포토샵, 영상편집
+-장점 : 쉽게 쓸 수 있다
+-단점 : 무겁다, 세부기능활용이 어렵다, 자동화 어렵다
+
+---------------------------------------------------------------
+*다운로드 폴더에서***
+/ 루트폴더 - 
+
+ls : 폴더 안에 있는 파일들 확인하기
+cd : 현재폴더경로를 확인하기 (change directory)
+mv : 파일명 변경 or 파일 경로 이동
+pwd : 현재 폴더 경로 출력하기 (print working directory)
+rm : 파일 삭제하기
+rm - rf : 폴더 삭제하기
+touch hello.c : hello.c라는 빈파일 생성
+
+cd .. : 상위폴더이동
+cd pytorch : pytorch로 들어가기(하위폴더로 이동)
+
+commit은 소스파일 수정한것
+
+git checkout master => 폴더 가져와
+
+ctrl + c
+q 나가기
+
+협업 시나리오 : 
+1. fork 팀프로젝트 복사
+2. clone 소스코드 다운로드
+3. git 히스토리 간단분석
+4. 설정 (저자 정보)
+5. commit 소스수정내역 저장
+6. push 업로드 (fork 프로젝트에 업로드)
+7. Pull-Request (나의 작업 commit 제출) : PR
+
+commit = message(소스수정 이유) 
+             + patch, diff(수정내용)
+
+달라진 이유 - "update" 사용하는 경우 많음 -> 이렇게 쓰지 말것
+올바른 예 : 
+1) Fix : 잘못된 것을 고친것
+2) Add : 없던 기능/옵션 추가될 때
+3) Improve : 원래 잘 되던건데 개선한 것
+ (ex, 10초걸리던걸 5초로 줄일 때)
+4) Support : 윈도우에서만 되던것을 리눅스에서도 지원 가능
+x86 -> ARM
+5) Refactor : 코드 재배치
+
+
+base commit 내가 작업하기 전 커밋
+
+
+git shortlog -s -n | nl
+                ------ 왼쪽에 있는 것을 오른쪽으로 넘겨서 등수
+
+log
+
+1 )git log --oneline | wc -l 
+=> 총 커밋 개수
+2) git log --oneline   
+=> 로그메시지 한줄씩만
+3) git log 
+=>로그메시지 전부보기
+4) git log -p 
+=> 로그메시지와 diff까지 전부 보기
+
+
+
+빨간색은 지워지고 초록색은 추가
+
+git show 6c8e2ba | grep "diff --git"
+   => grep 찾아내기
+git show 6c8e2ba | grep "diff --git" | wc -l
+   => 갯수는?
+
+git log --oneline --after=2020-01-01 --before=2020-06-30 -- mnist/main.py
+=> 2020년 상반기 수정개수
+
+$ git log --reverse 수정내역 옛날꺼부터 보기
+
+패싱 - 미리 받아놨던 아이디랑 패스워드
+캐싱데이터 - 미리 읽어놓은 데이터 
+
+.git 폴더 : 히스토리 창고
+
+not staged = 준비 안됐다 => add
+add 히스토리 만들 준비
+touch는 새로운 파일 생성
+
+nano mnist/main.py
+^ 은 ctrl을 의미
+ctrl o => 저장
+ctrl x => 나가기
+
+git diff 다른점 보기
+git stash 임시저장 (내가 한 작업이 제대로 되었는지 비포 에프터 비교할 때 사용)
+git stash pop 다시 나타남
+
+
+config => 설정값
+
+add 취소방법: git reset
+linearity : 비선형함수..?
+git remote -v : url 보여줌
+
+token 내부적 토큰 생성 - 비밀 키값 (외부에 노출되면 안됨)
+
+
+
+프로젝트 복사 - 클론 - 수정 - 토큰 - 푸시업로드 - pull request
+upstream 팀프로젝트
+origin 내꺼
+
+checkout : 도서관(.git 히스토리 창고)책을 대출받다
+               ".git 히스토리 창고에서 꺼내오다"
+
+git checkout -- mnist/main.py
+    => 모든걸 다 날려버리고 원상복구
+git checkout master => 폴더 가져와
+
+
+git add mnist/main.py
+git status   => modified 적용(초록색)
+git reset => add취소
+git status => 다시 빨간색으로 나옴
+
+git log --oneline -5 최근 다섯개 보여줘
+git reset --hard HEAD~1 위에 하나 날려버리기
+-s -m 라이센스에 서명 동의 
+          (안됐을 경우 => cla: no)
+git commit --amend => 맨 위에 있는 커밋 수정
+
+변경된 오픈소스 => rebase 최신역사로 베이스 업데이트    ------------ fetch(가져오기) 사용
+rebase(업데이트) 
+*pull = fetch + merge
+
+
+git fetch upstream master 업스트림에서 마스터를 가져오겠다
+(내부브랜치 자동생성 => upstream/master)
+업스트림/마스터 라는 이름의 브랜치가 생김
+git rebase upstream/master
+
+
+***푸시하기
+git push origin master
+
+git remote add upstream https://github.com/taeung/pytorch-example
+=> 업스트림 추가
+git remote -v
+=> 확인
+
+토큰(token)
+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
+
+
+rebase
+1단계 : 되감기 rewind
+2단계 : 베이스갱신 rebase
+3단계 : 합치기
+같은 파일을 커밋하면 충돌남
+
+git rebase -i --root 모든 커밋기록
+git rebase --abort 리베이스 취소
+
+
+
+git log --oneline => 전체 기록보기
+
+touch hello.txt
+git add hello.txt
+git commit --amend
+
+rebase 취소하기:
+git rebase --abort
+commit 히스토리 원상복구:
+git reset --hard origin/master
+
+
+* 버전 관리
+git fetch --tags
+git tag
+
+
+git reset --hard v0.8 =>0.8버전으로 리셋
+ls
+git reset --hard origin/master => 최신버전으로 리셋
+ls
+ls cmds => cmd들이 모두 그룹으로 됨
+
+git log --oneline
+git tag v0.12 b2650116 => 버전추가
+
+git tag -d v0.12 => 삭제
+git tag -d vtest
+

@@ -1,0 +1,40 @@
+[실습] 데이터 조회하기 _find
+
+1. exam collection에서 이름과 주소와 servlet점수를 출력해보자
+db.exam.find({}, {name:1, addr:1, servlet:1})
+​
+
+2. exam collection에서 java점수 중 70점 이상을 출력해보자
+db.exam.find({java:{$gte:70}})
+​
+
+3. exam collection에서 이름, java점수를 출력하고 bonus가 2000이상
+
+인 사람만 출력해보자
+db.exam.find({bonus:{$gte:2000}}, {name:1, java:1})
+​
+
+4. exam에서 dept가 인사이면서 addr이 안양이거나 대구인 document 출력
+ 4-1)db.exam.find({$and:[{dept:"인사"}, {$or:[ {addr:"인천"}, {addr:"대구"} ]}]})
+
+
+​ 4-2)db.exam.find({$and:    [{dept:"인사"}, {addr:{$in:["인천", "대구"] } } ]       })
+
+5. exam에서 servlet점수가 70에서 90사이이며 dept가 총무인 document 조회
+db.exam.find( {$and:[ {servlet:{$gte:70, $lte:90}} ,  {dept:"총무"} ] })
+​
+
+6. exam에서 이름에 김씨인 사람 조회해보기
+db.exam.find({name:/^김/})
+​
+
+7. exam에서 servlet점수가 가장 낮은 document와 가장 높은 document 출력
+db.exam.find().sort({servlet:1}).limit(1)
+​db.exam.find().sort({servlet:-1}).limit(1)
+
+8. java점수가 가장 높은 document중에 7개를 출력하되 2개를 건너뛰고 출력
+db.exam.find().sort({java:-1}).skip(2).limit(7)
+​
+
+9. 아이디에 n과 o가 들어가는 document 구하기
+db.exam.find({id:/n|o/})

@@ -1,0 +1,6 @@
+db.customer.insertMany([{id:"id01", pass:1111, name:"andy", info:{city:["seoul", "busan", "jeju"], toeic:[700,800,650,850,855]}},{id:"id02", pass:2222, name:"lule", info:{city:["seoul","seoul", "jeju"], toeic:[555,780,650,900,855]}},{id:"id03", pass:3333, name:"jon", info:{city:["busan", "ansan", "seoul"], toeic:[480,540,656,770,820]}},{id:"id04", pass:4444, name:"harry", info:{city:["jeju", "dokdo", "daegu"], toeic:[450,500,558,850,950]}},{id:"id05", pass:5555, name:"hermione", info:{city:["seoul", "sokcho", "seoul"], toeic:[700,800,860,870,890]}}
+])
+
+
+db.customer.insertOne({id:"id01", pass:1111, name:"andy", info:{city:["seoul", "busan", "jeju"], toeic:[700,800,650,850,855]}
+})

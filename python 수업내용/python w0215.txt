@@ -1,0 +1,49 @@
+w0215
+1. 테이블생성 -자유
+2. sql 문 작성
+3. model 작성
+4. db작성
+5. app 작성 (ui)
+
+
+1. What is RDBMS(Relational Database Management System)
+-데이터의 독립성
+-데이터의 무결성
+-보안
+-관리
+
+ * 종류
+ 1) Oracle - Unix, Linux, Windows, MySQL
+ 2) SQL Server (MS) 
+ 3) IBM DB2
+
+ 1) PostgreSQL
+ 2) MariaDB(MySQL)
+ 3) SQLite
+
+2. SQL
+ANSI 표준 SQL        => 협회시험 SQLD
+Oracle - PL/SQL
+MS SQL Server - T-SQL
+MariaDB - SQL
+
+
+
+
+
+1. DML 조작(CRUD)
+INSERT, UPDATE, DELETE, SELECT
+
+2. DDL 정의 definition language
+CREATE, DROP(table 삭제), ALTER
+
+TCL 트랜젝션 제어
+
+
+
+SELET 함수
+1)단일행 처리
+-DISTINCT
+-AS, ||
+2)멀티행 처리
+3)여러 테이블 처리

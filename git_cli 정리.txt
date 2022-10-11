@@ -1,0 +1,97 @@
+
+git status : 변경사항 보기
+git log : commit 내역 보기
+
+========================*git 프로젝트 연결
+1. 해당 프로젝트 폴더로 이동
+2. 마우스 오른쪽 버튼 클릭 - git bash
+3. git init
+4. git add .
+5. git commit -m "프로젝트 초기화 완료"
+6. git config --global user.email "이메일@gmail.com"
+   git config --global user.name "내이름"
+7. 5. git commit -m "프로젝트 초기화 완료"
+8. git remote add origin (내 github주소)
+9. git push origin main
+10. github사이트에서 확인
+
+========================*기존 파일에서 변경할 때
+git commit -am "commit message" : add와 commit을 동시에
+
+========================*새로운 파일이 생겼을 때
+git add . : 변경사항을 한꺼번에
+git add (파일 이름) : 변경사항을 하나씩
+
+git commit -m "commit message" : 커밋하기
+
+
+========================브랜치 관련
+git branch (new branch name) : branch 생성
+git branch : 브랜치 확인
+switch : branch 간 이동
+
+git switch -c (new branch name) : branch 생성과 동시에 이동 
+git branch -d (branch name) : branch 삭제
+  지울 브랜치에 다른 브랜치로 적용되지 않은 내용의 커밋이 있을 시에는 -D
+   git branch -D (branch name)
+git branch -m (기존 브랜치) (새로운 브랜치 이름) : 브랜치 이름 변경
+
+
+========================결과 살펴보기
+git log : 위치한 브랜치에서의 내역만 볼 수 있음
+git log --all --decorate --oneline --graph : 여러 브랜치의 내역 편리하기 보기
+
+
+
+========================*브랜치 합치기(merge)
+합쳐질(남겨질) 브랜치로 이동 git switch main
+git merge (합칠[없어질] 브랜치) git merge add-coach
+git branch -d (합친 브랜치 삭제)
+
+========================**브랜치 합치기(rebase)
+합칠 브랜치로 이동 git switch new-teams
+git token:
+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
+
+git rebase main
+//main브랜치의 싹을 맨 끝으로 이동하기 위해 머지
+git merge new-teams
+
+충돌이 너무 많아 merge를 중단하겠다
+git merge --abort
+
+======================충돌 해결하기 (merge)
+git merge conflict-1으로 병합 -> 충돌 발생
+충돌부분 확인 (git status) or VS Code에서 확인 가능
+git add .
+git commit
+
+======================충돌 해결하기 (rebase)
+충돌이 너무 많아서 해결이 어려울 경우 
+git rebase --abort
+
+해결 가능 시
+충돌 부분 수정한 후
+git add .
+//충돌 모두 해결될 때까지 반복
+git rebase --continue
+
+git switch main
+git merge conflict-2로 마무리
+
+
+
+========================원격 저장소
+1. 로컬 git 저장소에서 원격 저장소로의 연결 추가:
+git remote add origin (원격 저장소 주소)
+
+2. 기본 브랜치명을 main으로:
+git branch -M main
+
+3. 로컬 저장소의 커밋 내역들 원격으로 push(업로드):
+git push -u origin main
+      -u는 기본으로 어느 원격 브랜치에 push를 할 것인지 세팅
+
+
+git remote: 원격 저장소 확인
+git remote --v: 자세한 내용 확인

@@ -1,0 +1,132 @@
+<style>
+    #map{
+        margin:0 auto;
+        width:400px;
+        height:400px;
+    }
+    .ifimg{
+        width:80px;
+    }
+</style>
+<script>
+    $(document).ready(function(){
+        var mapContainer = document.getElementById('map'),
+        mapOption = {
+            center: new kakao.maps.LatLng(35.086086, 129.022360),
+            level: 8
+        };
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        var mapTypeControl = new kakao.maps.MapTypeControl();
+        map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+        var zoomControl = new kakao.maps.ZoomControl();
+        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+
+
+
+        $('#s').click(function(){
+            // 37.538493, 127.001003
+            var moveLatLon = new kakao.maps.LatLng(37.538493, 127.001003);
+            map.setCenter(moveLatLon);
+
+            var position =  new kakao.maps.LatLng(37.548493, 127.002003);
+            var marker = new kakao.maps.Marker({
+                                position: position
+                         });
+            marker.setMap(map);
+
+            var iwContent = '<div style="padding:5px;">Hello World!</div><img class="ifimg" src="/static/img/logo.png">';
+
+            var infowindow = new kakao.maps.InfoWindow({
+                content : iwContent
+            });
+
+
+            kakao.maps.event.addListener(marker, 'mouseover', function() {
+                infowindow.open(map, marker);
+            });
+
+            kakao.maps.event.addListener(marker, 'mouseout', function() {
+                infowindow.close();
+            });
+            kakao.maps.event.addListener(marker, 'click', function() {
+                location.href='http://www.naver.com';
+            });
+
+        });
+        $('#b').click(function(){
+            // 35.080971, 129.022359
+            var moveLatLon = new kakao.maps.LatLng(35.080971, 129.022359);
+            map.setCenter(moveLatLon);
+
+            var positions = [
+                {
+                    content: '<div>카카오</div>',
+                    latlng: new kakao.maps.LatLng(35.085971, 129.032359),
+                    target: 'http://www.naver.com'
+                },
+                {
+                    content: '<div>생태연못</div>',
+                    latlng: new kakao.maps.LatLng(35.085971, 129.025359),
+                    target: 'http://www.google.com'
+                },
+                {
+                    content: '<div>텃밭</div>',
+                    latlng: new kakao.maps.LatLng(35.081971, 129.032359),
+                    target:'http://www.daum.net'
+                },
+                {
+                    content: '<div>근린공원</div>',
+                    latlng: new kakao.maps.LatLng(35.090971, 129.032359),
+                    target:'http://www.msn.com'
+                }
+            ];
+
+            for (var i = 0; i < positions.length; i ++) {
+                var marker = new kakao.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: positions[i].latlng // 마커의 위치
+                });
+
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: positions[i].content // 인포윈도우에 표시할 내용
+                });
+
+                kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+                kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+                kakao.maps.event.addListener(marker, 'click', makeClickListener(positions[i].target));
+            }
+
+            function makeClickListener(target){
+                return function(){
+                    location.href=target;
+                };
+            };
+
+            function makeOverListener(map, marker, infowindow) {
+                return function() {
+                    infowindow.open(map, marker);
+                };
+            }
+
+            function makeOutListener(infowindow) {
+                return function() {
+                    infowindow.close();
+                };
+            }
+
+
+
+        });
+
+    });
+</script>
+
+<section>
+    <h1>Map</h1>
+    <button id="s">Seoul</button><button id="b">Busan</button>
+    <div id="map"></div>
+</section>
+
+

@@ -1,0 +1,64 @@
+컨피그 설정 확인
+=> git config -l
+
+롱네임 옵션일 경우 --
+숏네임 -
+ex. -l / --list 같은 것
+
+&& : 는 앞에 명령어 ok이면 뒤에꺼 실행
+
+[rebase 취소하기]
+git rebase --abort
+[commit 히스토리 원상복구]*****
+git reset --hard origin/master
+
+
+*****rebase 파일추가
+[되감기]
+git rebase -i --root
+[변경(edit)]
+touch hello_1.c && git add hello_1.c && git commit -m "test : add hello_1.c"
+touch hello_2.c && git add hello_2.c && git commit -m "test : add hello_2.c"
+touch hello_3.c && git add hello_3.c && git commit -m "test : add hello_3.c"
+[다시 쌓기]
+git rebase --continue
+
+*****rebase 파일 합치기(hello_2 + hello_3)
+git rebase -i --root 
+git reset --soft HEAD~1 => 커밋은 삭제하지만 파일은 남아있음
+git commit --amend => hello_3파일이 hello_2파일로 흡수됨
+git rebase --continue => 다시 쌓기
+
+
+soft는 파일은 남겨두고 커밋만 삭제
+hard는 다 날려버리고
+
+git commit --amend 기능 : 
+1) 최상위 commit message 수정
+2) 만약에 (git add 걸려있는) 파일이 있으면 최상위 commit에 흡수를 시킨다.
+
+*****rebase 파일 쪼개기
+git rebase -i --root => 열어서 edit걸고
+git reset --soft HEAD~1 =>일단 커밋 삭제 후
+git reset => 파일 쪼개기
+git add hello_1.c && git commit -m "test : add hello_1.c" =>파일 하나씩 재설정
+git add hello_2.c && git commit -m "test : add hello_2.c"
+git add hello_3.c && git commit -m "test : add hello_3.c"
+git rebase --continue => 다시 쌓기
+
+
+*****blame
+깃 로그 - 시간대별로 로그 메세지
+소스 라인 바이 라인이 무슨 커밋에 의해서 됐는지
+/키워드     ex)/class Parser
+n
+N
+
+/dev/nu11 => 아무것도 없는 최초 파일
+
+git log --oneline --reverse | head -3 =>최초 커밋 세개
+
+
+
+
+

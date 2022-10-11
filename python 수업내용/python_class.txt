@@ -1,0 +1,13 @@
+OOP 객체지향 언어
+(Object Oriented Programming)
+
+- 현실 세계의 모든 내용을 표현 가능
+- 재사용가능
+- 유지보수가 좋다
+- Java, C++
+
+-Inheritance(상속)
+-Encapsulation(캡슐화, 속성을 보호) => 외부에서는 함부로 접근할 수 없도록 만드는것  __사용__
+-Polymorphism(다형성)
+
+OOAD(Analysis&Design)

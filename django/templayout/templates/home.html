@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/layout.css' %}">
+    <style>
+
+    </style>
+</head>
+<body>
+    <header>
+        {% if request.session.sessionid == None %}
+            <span><a href="login">LOGIN</a></span>
+            <span><a href="register">REGISTER</a></span>
+        {% else %}
+            <span>{{request.session.sessionid}}</span>
+            <span><a href="logout">LOGOUT</a></span>
+        {% endif %}
+        <h1>HTML5 & CSS</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/">HOME</a></li>
+            <li><a href="html5">User Add</a></li>
+            <li><a href="css3">CSS3</a></li>
+            <li><a href="ajax">AJAX</a></li>
+            <li><a href="json">JSON</a></li>
+        </ul>
+    </nav>
+    {% if center != None %}
+        {% include center %}
+    {% else %}
+        <section></section>
+    {% endif %}
+    <footer></footer>
+</body>
+</html>

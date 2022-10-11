@@ -1,0 +1,174 @@
+파이참 터미널에
+
+Django-admin startproject raspberryweb .   => config
+python manage.py startapp raspberrypi
+python manage.py runserver
+
+App = 기능
+테이블 하나에 대한 액세스 작업이 app
+
+
+한번 클릭했을 때 호출되는 function은 views에 정의
+
+
+client 가 request -> urls에서 패쓰확인 -> views에서 작업
+
+404 page not found 
+: 경로 제대로 되었는지 확인
+
+
+http 는 동기 통신
+
+websocket 비동기 소켓 통신(e.g. 지도)
+- client 랑 server랑 통신하는 동안 다른 일도 할 수 있도록/ 실시간 처리
+http는 http대로
+뒤에서 계속 작동하는 웹소켓
+
+
+-----------------------------------------------------------------------
+server 띄우기(cmd)
+
+mosquitto -c mosquitto.conf -v
+
+
+-----------------------------------------------------------------------
+f12 개발자모드
+
+
+
+
+
+
+
+
+
+
+
+[웹소켓을 위한 설정]
+
+Web으로 mqtt통신하기
+ - front 페이지에서 web과 broker의 통신은 sub/pub작업이 지속되어야 한다.
+ - 실시간으로 subscribe하고 publish할 수 있어야 한다.
+ - websocket통신을 이용해서 작업해야 한다.
+ - mosquitto(broker)가 websocket통신을 지원한다.
+ - back-end에서 websocket통신하는 코드를 직접 작성하지 않아도 된다.
+
+1. mosquitto의 설정 파일을 변경한다.
+  - 기본설정은 일반적인 mqtt통신만 지원되도록 설정
+  - 일반적인 mqtt통신과 websocket통신이 모두 지원되도록 변경
+
+
+우리는 version 1.6.9
+mosquitto.conf 파일에 맨마지막에 추가
+---------------
+#include_dir
+listener 9001
+protocol websockets
+
+#mqtt
+listener 1883
+protocol mqtt
+---------------
+
+명령 프롬포트
+cd "Program Files"
+cd mosquitto
+mosquitto -c mosquitto.conf -v => 포트 열린거 확인
+
+
+
+
+
+
+https://www.eclipse.org/paho/index.php?page=clients/js/index.php
+
+CDNs
+
+min.js => 압축버전
+
+
+
+
+
+
+
+
+
+
+
+
+css 는 class
+jquery랑 자바스크립트는 id(식별자)
+
+
+index.html파일의 gauge가 바뀌도록 작업
+  - 라즈베리파이의 servo_subscriber를 실행해서
+    전송된 값을 적용하기
+  - t : 전송된 값 + 10
+  - h : 전송된 값 + 20
+  - d : 전송된 값 + 30
+
+실행결과만 캡쳐해서 메일로 전송하기
+
+
+
+
+div는 줄바꿈
+span은 안바뀜
+
+태그를 앨리먼트라고 부름
+
+문서 전체를 읽는 것 = 파싱
+
+모든 문서를 객체로 만든것 = DOM => 쉽게 구현해놓은 것 jQuery
+
+innerHTML 디아이브이 안에 에치티엠엘 코드를 실행
+
+펑션은 보충 밑에서 <body> 맨밑
+
+csrf는 자바스크립트공격
+
+
+[오늘미션 4/20]
+캡션 바꾸기
+jqxGauge 구글 검색해보기
+
+127.0.0.1 말고
+[본인 아이피로 들어갈 수 있게 설정하는 방법]
+
+settings에 가서
+allowed_host = ["*"]
+csrf 주석처리
+--------------------------------------------
+파이썬 오른쪽 위에 보면 main 드롭박스
+conf 들어가서
+script path: manage.py로 바꿈
+parameter:(띄어쓰기) runserver 0.0.0.0:8000 => ip로 치고들어오겠다
+---------------------------------------------
+핸드폰에서 보려면
+같은 와이파이 연결 후
+http://172.30.1.59:8000 
+
+
+
+
+
+
+
+
+[미션]
+ - Application과 Application이 통신
+   pir_mqtt_pc_test.py
+   pir_mqtt_raspberry_test.py
+
+  step1
+   -  모션이 발생되면 "motion detected..." publish
+   -  pc에서는 subscribe하면서 메시지가 전송되면 print출력하기
+  step2
+   -  pirSensor와 MyMqtt클래스를 정의하고 테스트해보기
+  step3
+   - mqtt_pir.html파일을 작성하고 라즈베리파이에서 publish가 되면 
+     alert으로 "수상한 움직임이 있습니다." 창 발생시키기
+
+ ==> 목요일 9시까지 메일로 제출하기
+
